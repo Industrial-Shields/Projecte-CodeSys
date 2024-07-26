@@ -1,5 +1,6 @@
 # CODESYS project templates for Industrial Shield's Raspberry PLCs
 **by Industrial Shields**
+
 This repository contains project templates for CODESYS, set up to work with Raspberry PLCs
 
 ## Initialisation
@@ -31,6 +32,8 @@ WSTR must be the name of the IOs in the PLC. Some valid names would be "I0.12", 
 ### Relay PLC
 Relay PLCs use the GPIOsR() function block. It must be initialised as `Var : GPIOsR := GPIOsR(WSTR)`.
 
+WSTR must be the name of the IOs in the PLC. It works the same as GPIOs FB, with the addition of relay declaration. For example: "R0.5"
+
 **List of methods**
 * **GPIOsR.read_analog()** reads an analog input. Returns a UINT.
 * **GPIOsR.read_digital()** reads a digital input. Returns a BOOL.
@@ -39,7 +42,6 @@ Relay PLCs use the GPIOsR() function block. It must be initialised as `Var : GPI
 * **GPIOsR.write_analog(BOOL)** writes a digital output. Requires an BOOL, returns a BOOL.
 * **GPIOsR.write_relay(BOOL)** writes to a relay. Requires a BOOL, returns a BOOL.
 
-WSTR must be the name of the IOs in the PLC. It works the same as GPIOs FB, with the addition of relay declaration. For example: "R0.5"
 ### Working Example
 ```
 PROGRAM PLC_PRG
@@ -69,7 +71,7 @@ List of direct GPIOs found in RPI PLCs:
 | I2.6 | 4  | I2.1 | 4  |
 
 A series of steps must be followed in order to add a direct GPIO to the project:
-1. Declare variable in the program header
+### 1. Declare variable in the program header
 ```
 PROGRAM PLC_PRG
 VAR
@@ -77,14 +79,14 @@ DirectVar : BOOL;
 i : BOOL;
 END_VAR
 ```
-2. Add it to the Raspberry's GPIOs table
+### 2. Add it to the Raspberry's GPIOs table
 
 In GPIOs_A_B (GPIOs A/B) --> GPIOs Parameters:
 * Set desired GPIO to Input or Output state
 
 In GPIOs_A_B (GPIOs A/B) --> GPIOs I/O Mapping:
 * Set variable. It should look something like `Applicaton.PLC_PRG.DirectVar`
-3. Use in main program
+### 3. Use in main program
 ```
 i2 := DirectVar;
 ```
