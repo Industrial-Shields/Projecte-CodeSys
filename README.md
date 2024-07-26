@@ -15,8 +15,7 @@ END_IF
 ```
 
 ## PLC GPIOs
-Raspberry PLC uses the i2c bus to act on the I/Os. A custom set of Function Blocks is required. Those can be found on the project templates.
-
+A custom set of Function Blocks is required, which can be found on the project templates.
 Analog and Relay PLCs internally differ on how to reference the GPIOs location. Therefore, the specific Function Block must be used.
 ### Analog PLC
 Analog PLCs use the GPIOs() function block. This must be declared on the variable as `Var : GPIOs := GPIOs(WSTR)`.
