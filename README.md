@@ -60,15 +60,14 @@ Var2.write(i2);
 Direct GPIOs must be declared differently from other GPIOs. 
 
 List of direct GPIOs found in RPI PLCs:
-| Analog PLCs | | Relay PLCs | |
-| --- | --- | --- | --- |
-| Name | RPI pin | Name | RPI pin |
-| I0.5 | 13 | I0.0 | 13 |
-| I0.6 | 12 | I0.1 | 12 |
-| I1.5 | 27 | I1.0 | 27 |
-| I1.6 | 5  | I1.1 | 5  |
-| I2.5 | 26 | I2.0 | 26 |
-| I2.6 | 4  | I2.1 | 4  |
+| Analog PLC | Relay PLC | RPI pin |
+| --- | --- | --- |
+| I0.5 | I0.0 | 13 |
+| I0.6 | I0.1 | 12 |
+| I1.5 | I1.0 | 27 |
+| I1.6 | I1.1 | 5  |
+| I2.5 | I2.0 | 26 |
+| I2.6 | I2.1 | 4  |
 
 A series of steps must be followed in order to add a direct GPIO to the project:
 ### 1. Declare variable in the program header
