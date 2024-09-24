@@ -79,11 +79,12 @@ i : BOOL;
 END_VAR
 ```
 ### 2. Add it to the Raspberry's GPIOs table
+Update "GPIOs A/B" to "GPIOs B+/Pi2"
 
-In GPIOs_A_B (GPIOs A/B) --> GPIOs Parameters:
+In GPIOs_A_B (GPIOs B+/Pi2) --> GPIOs Parameters:
 * Set desired GPIO to Input or Output state
 
-In GPIOs_A_B (GPIOs A/B) --> GPIOs I/O Mapping:
+In GPIOs_A_B (GPIOs B+/Pi2) --> GPIOs I/O Mapping:
 * Set variable. It should look something like `Applicaton.PLC_PRG.DirectVar`
 ### 3. Use in main program
 ```
