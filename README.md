@@ -3,6 +3,10 @@
 
 This repository contains project templates for CODESYS, set up to work with Raspberry PLCs
 
+* [Initialisation](https://github.com/Industrial-Shields/Projecte-CodeSys/blob/main/README.md#initialisation)
+* [GPIOs (Structured Text)](https://github.com/Industrial-Shields/Projecte-CodeSys/blob/main/README.md#plc-gpios)
+* [Ladder](https://github.com/Industrial-Shields/Projecte-CodeSys/blob/main/README.md#ladder)
+
 ## Initialisation
 An IS PLC requires the i2c bus to be active in order for the GPIOS to work. This must be initiated in the PLC main program with the method `i2c_init()` once every time the PLC starts:
 ```
@@ -90,3 +94,10 @@ In GPIOs_A_B (GPIOs B+/Pi2) --> GPIOs I/O Mapping:
 ```
 i2 := DirectVar;
 ```
+
+# Ladder
+The GPIOs of the PLC can be interacted by using the Ladder blocks "EXECUTE".
+
+Drag the Execution block at the ladder diagram and write in Structured Text with any of the previously described functions.
+
+**Caution**: The 12c_init function must be always called as well in the first code execution. A simple way to implement this behavor is having a BOOL variable activating an Execute block with the 12c_init() and setting said variable to FALSE.
