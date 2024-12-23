@@ -1,7 +1,15 @@
 # CODESYS project templates for Industrial Shield's Raspberry PLCs
 **by Industrial Shields**
 
-This repository contains project templates for CODESYS, set up to work with Raspberry PLCs
+This repository contains project templates for CODESYS, set up to work with Raspberry PLCs v6.
+None of those implementations are the standard for CODESYS, and use paradigms closer to regular programming instead of PLC programming.
+
+**Warning!! None of this methods are standard for CODESYS and shouldn't be used on a commercial environment**
+
+There are currently 2 methods for accessing the GPIOs. They're referred in this README as "old" and "most recent".
+
+# "Old" method
+This method is the quickest implementation for accessing the RPIPLC's GPIOs. The catch is it only works with v6 PLCs.
 
 * [Initialisation](https://github.com/Industrial-Shields/Projecte-CodeSys/blob/main/README.md#initialisation)
 * [GPIOs (Structured Text)](https://github.com/Industrial-Shields/Projecte-CodeSys/blob/main/README.md#plc-gpios)
@@ -95,9 +103,47 @@ In GPIOs_A_B (GPIOs B+/Pi2) --> GPIOs I/O Mapping:
 i2 := DirectVar;
 ```
 
+# "Most recent" method
+It consists on a library that calls at the functions on `~/test/` to get and set values on the GPIOs. With this, it can bridge the gap and work with v4 RPIPLCs.
+
+This library uses a lot of concatenations, therefore it's slow and not recommended for serious usage. 
+
+## Usage
+### Declaring GPIOs
+The GPIOs in this are declared as an object that acts on them all, instead of individual instances
+```
+PROGRAM PLC_PRG
+VAR
+rpiplc : Rpiplc.GPIOs('RPIPLC_21','V4');
+END_VAR
+```
+The model of RPIPLC and version must be declared in a string.
+### Communication
+The GPIOs object has some methods:
+* **GPIOs.read_analog(STRING)** Requires a STRING with a GPIO (ex: 'I0.5'). Returns a UINT.
+* **GPIOs.read_analog(STRING)** Requires a STRING with a GPIO (ex: 'I0.1'). Returns a UINT.
+* **GPIOs.write_analog(STRING, UINT)** Requires a STRING with a GPIO (ex: 'A0.6') and a value UINT to be written. Returns a STRING with the console feedback.
+* **GPIOs.write_digital(STRING, BOOL)** Requires a STRING with a GPIO (ex: 'Q0.2') and a value BOOL to be written. Returns a STRING with the console feedback.
+* **GPIOs.write_relay(STRING, BOOL)** Requires a STRING with a GPIO (ex: 'R0.1') and a value UINT to be written. Returns a STRING with the console feedback.
+### Example
+
+```
+PROGRAM PLC_PRG
+VAR
+rpiplc : Rpiplc.GPIOs('RPIPLC_21','V4');
+pin : STRING := 'Q0.1';
+i : BOOL := false;
+END_VAR
+```
+```
+rpiplc.write_digital(pin,i);
+i := NOT(i);
+```
+
+
 # Ladder
 The GPIOs of the PLC can be interacted by using the Ladder blocks "EXECUTE".
 
-Drag the Execution block at the ladder diagram and write in Structured Text with any of the previously described functions.
+Drag the Execution block at the ladder diagram and write in Structured Text with any of the previously described functions or methods.
 
-**Caution**: The 12c_init function must be always called as well in the first code execution. A simple way to implement this behavor is having a BOOL variable activating an Execute block with the 12c_init() and setting said variable to FALSE.
+**Caution**: The 12c_init function must be always called as well in the first code execution when using the "old" method. A simple way to implement this behavor is having a BOOL variable activating an Execute block with the 12c_init() and setting said variable to FALSE.
