@@ -4,12 +4,12 @@
 This repository contains project templates for CODESYS, set up to work with Raspberry PLCs v6.
 None of those implementations are the standard for CODESYS, and use paradigms closer to regular programming instead of PLC programming.
 
-**Warning!! None of this methods are standard for CODESYS and shouldn't be used on a commercial environment**
+**Warning!! None of this methods are standard for CODESYS and aren't recommended to be used on a commercial environment**
 
 There are currently 2 methods for accessing the GPIOs. They're referred in this README as "old" and "most recent".
 
 # "Old" method
-This method is the quickest implementation for accessing the RPIPLC's GPIOs. The catch is it only works with v6 PLCs.
+This method is the quickest implementation for accessing the RPIPLC's GPIOs. The catch is it only works with RPIPLC v6.
 
 * [Initialisation](https://github.com/Industrial-Shields/Projecte-CodeSys/blob/main/README.md#initialisation)
 * [GPIOs (Structured Text)](https://github.com/Industrial-Shields/Projecte-CodeSys/blob/main/README.md#plc-gpios)
@@ -104,9 +104,12 @@ i2 := DirectVar;
 ```
 
 # "Most recent" method
-It consists on a library that calls at the functions on `~/test/` to get and set values on the GPIOs. With this, it can bridge the gap and work with v4 RPIPLCs.
+It consists on a library that calls at the functions on `~/test/RPIPLC_V*/` to get and set values on the GPIOs. With this, it can work with v4 RPIPLCs.
 
-This library uses a lot of concatenations, therefore it's slow and not recommended for serious usage. 
+This library uses a lot of concatenations, therefore it's slow and not recommended for serious usage.
+
+- [ ] An update for this version is currently being worked on to enhance library speed.
+
 
 ## Usage
 ### Declaring GPIOs
